@@ -1,0 +1,11 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<!-- с помощью таймлифа передаем входной параметр от http в html. url=http://localhost:8080/HttpParametr?name=PHAR -->
+    <p th:text="'Hello, ' + ${name} + '!'" />
+</body>
+</html>
