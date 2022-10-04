@@ -5,12 +5,18 @@
     <title>Все люди</title>
 </head>
 <body>
-<div th:each="person : ${people}">  <!-- подобие цикла по массиву ${people}, где "person" - временная переменная-->
-    <!-- th:text - будет вставлять текст вместо поля "user"
-    @{/people/{id} - указываем ссылку на страницу. По сути, заходит через контроллер.
-    (id=${person.getId()}) - получаем ID для ссылки   -->
-    <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()}">user</a>
-</div>
+    <div th:each="person : ${people}">  <!-- подобие цикла по массиву ${people}, где "person" - временная переменная-->
+        <!-- th:text - будет вставлять текст вместо поля "user"
+        @{/people/{id} - указываем ссылку на страницу. По сути, заходит через контроллер.
+        (id=${person.getId()}) - получаем ID для ссылки   -->
+        <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()}">user</a>
+    </div>
 
+    <br/>
+    <a href="/people/newModelAttribute"> New people by Thymeleaf</a>
+    <br/>
+    <a href="/people/newPerson"> New people by newPerson</a>
+    <br/>
+    <a href="/people/newNoThymeleaf"> New people by newNoThymeleaf</a>
 </body>
 </html>

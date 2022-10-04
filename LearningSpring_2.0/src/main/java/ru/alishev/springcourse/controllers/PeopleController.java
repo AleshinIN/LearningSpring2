@@ -1,13 +1,14 @@
 package ru.alishev.springcourse.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.alishev.springcourse.dao.PersonDAO;
+import ru.alishev.springcourse.models.Person;
 
+@Slf4j // логирование для эксепшена
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
@@ -29,5 +30,49 @@ public class PeopleController {
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("person", personDAO.show(id));
         return "people/show";
+    }
+
+////////////////////// Добавление пользователей
+    /** Возвращает html-форму на данный запрос. Через таймлиф(отправится объект) */
+    @GetMapping("/newModelAttribute") // если используем таймлиф, то ему нужно передать тот объект, для которого эта форма нужна
+    public String newPerson(@ModelAttribute("person") Person person) { // то же самое, что и нижний метод, ибо в обоих случаях создастся новый пустой объект
+        return "people/newThymeleaf";
+    }
+
+    @GetMapping("/newPerson")
+    public String newPerson(Model model) { // если используем таймлиф, то ему нужно передать тот объект, для которого эта форма нужна
+        model.addAttribute("person", new Person());
+        return "people/newThymeleaf";
+    }
+
+    /*  Отправка ту же анкету без таймлифа  */
+    @GetMapping("/newNoThymeleaf")
+    public String newPerson() { // если используем таймлиф, то ему нужно передать тот объект, для которого эта форма нужна
+        return "people/newNoThymeleaf";
+    }
+///////////////////
+
+    /** Берет данные из запроса и добавляет в базу новый объект с помощью DAO. Если отправляем POST через таймлиф */
+    @PostMapping()
+    public String create(@ModelAttribute("person") Person person) {
+        personDAO.save(person);
+        return "redirect:/people"; // "redirect:" говорит браузеру перейти на другую страницу
+    }
+
+    /** Берет данные из запроса и добавляет в базу новый объект с помощью DAO. Если отправляем POST без таймлиф */
+    @PostMapping("/POSTNoThymeleaf")
+    public String createNewNoThymeleaf(@RequestParam("name") String name, Model model) {
+        Person person = new Person();
+        person.setName(name);
+        personDAO.save(person);
+        model.addAttribute("person", person);
+        return "redirect:/people"; // "redirect:" говорит браузеру перейти на другую страницу
+    }
+
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public String handle(IllegalArgumentException e) {
+        log.error("Exception controller: " + e.getMessage());
+        return "Вылетел эксепшен в классе: " + this.getClass();
     }
 }
