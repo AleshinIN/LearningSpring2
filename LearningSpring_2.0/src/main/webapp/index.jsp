@@ -6,5 +6,7 @@
 </head>
 <body>
     <h2>Hello World!! Стартовая страница - index.jsp</h2>
+    <br/>
+    <a href="/people"> Home</a>
 </body>
 </html>

@@ -70,6 +70,27 @@ public class PeopleController {
     }
 
 
+    /** Редактирование человека */
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") int id) {
+        model.addAttribute("person", personDAO.show(id));
+        return "people/edit";
+    }
+
+    /** Принимает запрос на редактирование человека */
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("person") Person person, @PathVariable("id") int id) {
+        personDAO.update(id, person);
+        return "redirect:/people";
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") int id) {
+        personDAO.delete(id);
+        return "redirect:/people";
+    }
+
+
     @ExceptionHandler(IllegalArgumentException.class)
     public String handle(IllegalArgumentException e) {
         log.error("Exception controller: " + e.getMessage());

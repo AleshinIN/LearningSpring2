@@ -72,6 +72,14 @@
           <version>1.18.22</version>
           <scope>compile</scope>
       </dependency>
+
+    <!--  Добавляет аннотацию @Valid, которая позволяет добавить проверку получаемых значений  -->
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>8.0.0.Final</version>
+    </dependency>
+
   </dependencies>
 
   <build>
