@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>New person</title>
@@ -10,6 +10,12 @@
     <form th:method="POST" th:action="@{/people}" th:object="${person}">
         <label for="name">Enter name: </label>
         <input type="text" th:field="*{name}" id="name"/>
+
+        <!--  Скрытое поле(механизм таймлифа), которое появляется если условие true.
+          #fields - данный тег дает доступ ко всем полям "person".
+          th:errors="*{name}" - указываем ошибка какого поля будет отображаться(будет показано сообщение
+                message из аннотаций над полями класса)-->
+        <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
         <br/>
         <input type="submit" value="Create!"/>
     </form>

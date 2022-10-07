@@ -1,9 +1,11 @@
 package ru.alishev.springcourse.controllers;
 
+import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.alishev.springcourse.dao.PersonDAO;
 import ru.alishev.springcourse.models.Person;
@@ -54,7 +56,10 @@ public class PeopleController {
 
     /** Берет данные из запроса и добавляет в базу новый объект с помощью DAO. Если отправляем POST через таймлиф */
     @PostMapping()
-    public String create(@ModelAttribute("person") Person person) {
+    public String create(@ModelAttribute("person") @Valid Person person, // @Valid проверяет есть ли ошибка в данных по тем условиям, что помечены над объявлением полей
+                         BindingResult bindingResult) { // если выпала ошибка, то она запишется в этот класс
+        if (bindingResult.hasErrors()) return "people/newThymeleaf"; // если есть ошибка
+        System.out.println("------------- Зашел в @PostMapping()");
         personDAO.save(person);
         return "redirect:/people"; // "redirect:" говорит браузеру перейти на другую страницу
     }
