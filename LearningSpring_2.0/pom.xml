@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>ru.alishev.springcourse</groupId>
-  <artifactId>spring-request-parameters</artifactId>
+  <artifactId>spring-jdbc</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
@@ -83,6 +83,13 @@
       <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator</artifactId>
       <version>6.1.6.Final</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+    <dependency>
+      <groupId>org.postgresql</groupId> <!-- JDBC драйвер -->
+      <artifactId>postgresql</artifactId>
+      <version>42.5.0</version>
     </dependency>
 
   </dependencies>

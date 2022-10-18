@@ -58,8 +58,10 @@ public class PeopleController {
     @PostMapping()
     public String create(@ModelAttribute("person") @Valid Person person, // @Valid проверяет есть ли ошибка в данных по тем условиям, что помечены над объявлением полей
                          BindingResult bindingResult) { // если выпала ошибка, то она запишется в этот класс
-        if (bindingResult.hasErrors()) return "people/newThymeleaf"; // если есть ошибка
-        System.out.println("------------- Зашел в @PostMapping()");
+        if (bindingResult.hasErrors()) {
+            System.out.println("Ошибка при создании новой записи");
+            return "people/newThymeleaf"; // если есть ошибка
+        }
         personDAO.save(person);
         return "redirect:/people"; // "redirect:" говорит браузеру перейти на другую страницу
     }

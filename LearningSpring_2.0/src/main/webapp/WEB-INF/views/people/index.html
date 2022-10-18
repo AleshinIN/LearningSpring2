@@ -9,7 +9,11 @@
         <!-- th:text - будет вставлять текст вместо поля "user"
         @{/people/{id} - указываем ссылку на страницу. По сути, заходит через контроллер.
         (id=${person.getId()}) - получаем ID для ссылки   -->
+        <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getId()}">id</a>
         <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()}">user</a>
+        <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getAge()}">age</a>
+        <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getEmail()}">email</a>
+
     </div>
 
     <br/>
