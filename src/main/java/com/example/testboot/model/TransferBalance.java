@@ -16,5 +16,4 @@ public class TransferBalance {
     /** сколько переводят */
     private BigDecimal amount;
 
-
 }

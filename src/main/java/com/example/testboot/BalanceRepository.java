@@ -7,7 +7,7 @@ import java.security.DigestException;
 import java.util.HashMap;
 import java.util.Map;
 
-// слой:  дата аксес слой. Уровень общения с базой
+// слой: дата аксес слой. Уровень общения с базой
 /** Используем как хранилище данных */
 @Repository
 public class BalanceRepository { // сделаем хранилище для данных(чтобы не использовать SQL в данном уроке)

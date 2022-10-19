@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 
 // слой сервисов
-@Service // фасад для некоторой бизнес логики
+@Service //  фасад для некоторой бизнес логики
 @AllArgsConstructor
 public class BankService {
 
